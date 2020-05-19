@@ -68,7 +68,7 @@ namespace Superheros.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    _context.Entry(editedSuperhero).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+                    _context.Superheroes.Update(editedSuperhero);
                     _context.SaveChanges();
                 }
                 return RedirectToAction("index");
@@ -80,20 +80,20 @@ namespace Superheros.Controllers
         // GET: Superheroes/Delete/5
         public ActionResult Delete(int id)
         {
-            var editedSuperhero = _context.Superheroes.Where(s => s.Id == id).FirstOrDefault();
-            return View(editedSuperhero);
+            var deleteSuperhero = _context.Superheroes.Where(s => s.Id == id).FirstOrDefault();
+            return View(deleteSuperhero);
         }
 
         // POST: Superheroes/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(Superhero editedSuperhero)
+        public ActionResult Delete(Superhero deleteSuperhero)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
-                    _context.Superheroes.Remove;
+                    _context.Superheroes.Remove(deleteSuperhero);
                     _context.SaveChanges();
                 }
                 return RedirectToAction("index");
